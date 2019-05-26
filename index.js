@@ -323,31 +323,6 @@ req.params.id,function(err, rows, fields) {
 })
 
 
-app.post("/api/professorprofile/:id/findproject",
-function(req,res){
-  var temp={}
-  console.log(req.body.temp)
-  db.query('SELECT idProjects,project_name,type_of_project,amount_of_students,status_of_project, DATE_FORMAT(beginning_date,\'%Y-%m-%d\') as begdate,DATE_FORMAT(ending_date,\'%Y-%m-%d\') as enddate,comment,location,intensity,main_tasks,goals from projects WHERE project_name= ?',
-  req.body.temp,function(er,row,fields){
-    if (er) throw er
-    res.send(row)
-  })
-})
-
-app.post('/api/professorprofile/:id/findprojectwithdates'
-,
-function(req,res){
-  console.log(typeof req.body.beg)
-  console.log(req.body.beg)
-  console.log(req.body.end)
-  db.query('select idProjects,project_name,type_of_project,amount_of_students,status_of_project, DATE_FORMAT(beginning_date,\'%Y-%m-%d\') as begdate,DATE_FORMAT(ending_date,\'%Y-%m-%d\') as enddate,comment,location,intensity,main_tasks,goals from projects where (beginning_date BETWEEN ' + 'CAST('+`${req.body.beg}`+' AS DATE)'+ ' AND ' + 'CAST('+`${req.body.end}`+' AS DATE)'    +')',
-  function(er,row,fields){
-    if (er) throw er
-    res.send(row)
-  })
-}
-)
-
 
 
 

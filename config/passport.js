@@ -4,9 +4,8 @@ var passport= require('passport');
 var LocalStrategy= require('passport-local').Strategy;
 var mysql      = require('mysql');
 const bcrypt = require('bcrypt');
-
 var dbb = require('./db');//connect тут
-
+//Предполагается, что пароли, сохраненные в БД, зашифрованы с помощью bcrypt (rounds=10)
 module.exports=function(passport,dbb)
 {
     passport.use('local', new LocalStrategy(
